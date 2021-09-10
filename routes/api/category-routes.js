@@ -5,14 +5,11 @@ const { Category, Product } = require('../../models');
 
 router.get('/', async (req, res) => {
   // Find all categories and include their associated products.
-  // Due to the different wording of the guidance for category- and tag-routes I opted to include product price
-  // and stock in addition to its ID and name for both categories endpoint get routes. For the categories endpoint
-  // the product's category ID would be superfluous.
   try {
     const categoryData = await Category.findAll({
       include: [{
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }]
     });
     res.status(200).json(categoryData);
@@ -27,7 +24,7 @@ router.get('/:id', async (req, res) => {
     const categoryData = await Category.findByPk(req.params.id, {
       include: [{
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }]
     });
 

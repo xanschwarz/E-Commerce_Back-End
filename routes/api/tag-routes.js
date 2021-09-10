@@ -5,8 +5,6 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', async (req, res) => {
   // Find all tags and include their associated product data.
-  // Due to the different wording of the guidance for category- and tag-routes I opted to include all product data
-  // for both tags endpoint get routes.
   try {
     const tagData = await Tag.findAll({
       include: [{
