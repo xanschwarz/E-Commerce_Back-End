@@ -51,6 +51,7 @@ const productTagData = [
   },
 ];
 
+// Seed multiple product tags using the array above with bulkCreate.
 const seedProductTags = () => ProductTag.bulkCreate(productTagData);
 
 module.exports = seedProductTags;

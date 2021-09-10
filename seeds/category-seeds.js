@@ -18,6 +18,7 @@ const categoryData = [
   },
 ];
 
+// Seed multiple categories using the array above with bulkCreate.
 const seedCategories = () => Category.bulkCreate(categoryData);
 
 module.exports = seedCategories;

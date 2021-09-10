@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Tag, Product, ProductTag } = require("../../models");
 
-// The `/api/tags` endpoint
+// The '/api/tags' endpoint
 
 router.get("/", async (req, res) => {
   // Find all tags and include their associated product data.
@@ -14,14 +14,16 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+    // Successful, data displayed. This is used throughout.
     res.status(200).json(tagData);
   } catch (err) {
+    // Unsuccessful, error displayed. This is used throughout.
     res.status(500).json(err);
   }
 });
 
 router.get("/:id", async (req, res) => {
-  // Find a single tag by its `id` value and include its associated product data.
+  // Find a single tag by its 'id' value and include its associated product data.
   try {
     const tagData = await Tag.findByPk(req.params.id, {
       include: [
@@ -32,6 +34,7 @@ router.get("/:id", async (req, res) => {
       ],
     });
 
+    // If there is no tag with this ID return status 404 with message. This is used throughout.
     if (!tagData) {
       res.status(404).json({ message: "No tag found with this id!" });
       return;
@@ -54,7 +57,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  // Update a tag's name by its `id` value.
+  // Update a tag's name by its 'id' value.
   try {
     const tagData = await Tag.update(req.body, {
       where: {
@@ -72,7 +75,7 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  // Delete a tag by its `id` value.
+  // Delete a tag by its 'id' value.
   try {
     const tagData = await Tag.destroy({
       where: {

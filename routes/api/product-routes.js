@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
+// The '/api/products' endpoint
 
 router.get('/', async (req, res) => {
   // Find all products and include its associated category and tag data.
@@ -16,14 +16,16 @@ router.get('/', async (req, res) => {
         attributes: ['id', 'tag_name']
       }]
     });
+    // Successful, data displayed. This is used throughout.
     res.status(200).json(productData);
   } catch (err) {
+    // Unsuccessful, error displayed. This is used throughout.
     res.status(500).json(err);
   }
 });
 
 router.get('/:id', async (req, res) => {
-  // Find a single product by its `id` and include its associated category and tag data.
+  // Find a single product by its 'id' and include its associated category and tag data.
   try {
     const productData = await Product.findByPk(req.params.id, {
       include: [{
@@ -36,6 +38,7 @@ router.get('/:id', async (req, res) => {
       }]
     });
 
+    // If there is no product with this ID return status 404 with message. This is used throughout.
     if (!productData) {
       res.status(404).json({ message: 'No product found with this id!' });
       return;
@@ -121,7 +124,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  // Delete one product by its `id` value.
+  // Delete one product by its 'id' value.
   try {
     const productData = await Product.destroy({
       where: {

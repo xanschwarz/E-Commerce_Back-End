@@ -27,6 +27,7 @@ const tagData = [
   },
 ];
 
+// Seed multiple tags using the array above with bulkCreate.
 const seedTags = () => Tag.bulkCreate(tagData);
 
 module.exports = seedTags;
